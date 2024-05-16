@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ToDo List</h1>
+        <form action="/add_task" method="POST">
+            <input type="text" name="task" placeholder="Task" required>
+            <input type="datetime-local" name="due_date" required>
+            <select name="category" required>
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="College">College</option>
+                <option value="School">School</option>
+                <option value="Payment">Payment</option>
+                <option value="Shopping">Shopping</option>
+
+                <!-- Add more categories as needed -->
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul>
+            {% for task in tasks %}
+            <li class="{% if task[5] == 1 %}completed{% endif %}">
+                <span>{{ task[2] }}</span>
+                <span>{{ task[3] }}</span>
+                <span>{{ task[4] }}</span>
+                <a href="/complete_task/{{ task[0] }}">Complete</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="/delete_completed_tasks" method="POST">
+            <button type="submit" id="deleteBtn" class="delete-button">Delete Completed Tasks</button>
+        </form>
+        <a href="/logout">Logout</a>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
