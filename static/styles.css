@@ -1,90 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #ffffff;
 }
 
 .container {
-    width: 50%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    background-color: #2c3e50;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .container h1 {
-    text-align: center;
+    font-size: 2.5rem;
+    color: #ecf0f1;
+    margin-bottom: 20px;
+    font-weight: 700;
 }
 
 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 form input, form select, form button {
-    margin-bottom: 10px;
-    padding: 8px;
     width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #34495e;
+    border-radius: 5px;
+    background: #34495e;
+    color: #ecf0f1;
+    font-size: 1rem;
     box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+form input:focus, form select:focus, form button:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+    outline: none;
+}
+
+form button {
+    background-color: #2980b9;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form button:hover {
+    background-color: #1abc9c;
+}
+
+form button .spinner {
+    display: none;
+    margin-left: 10px;
+}
+
+form.submitting button .spinner {
+    display: inline-block;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 li {
-    background-color: #f9f9f9;
-    margin-bottom: 5px;
-    padding: 10px;
+    background-color: #34495e;
+    margin-bottom: 10px;
+    padding: 15px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+
+li:hover {
+    transform: scale(1.02);
+    background-color: #2c3e50;
 }
 
 li.completed {
-    background-color: #cfc;
+    background-color: #27ae60;
+    text-decoration: line-through;
 }
 
-a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
+li span {
+    flex-grow: 1;
+    text-align: left;
+}
+
+li a {
+    margin-left: 10px;
+    color: #ecf0f1;
     text-decoration: none;
-    color: #333;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
+li a:hover {
+    color: #1abc9c;
 }
 
-.delete-button {
-    background-color: #dc3545;
+#deleteBtn {
+    background-color: #c0392b;
+    width: 100%;
 }
 
-.delete-button:hover {
-    background-color: #c82333;
+#deleteBtn:hover {
+    background-color: #e74c3c;
 }
 
 .alert-error {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    padding: 8px;
+    color: #c0392b;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    padding: 10px;
     border-radius: 5px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    padding: 8px;
+    color: #27ae60;
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    padding: 10px;
     border-radius: 5px;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1abc9c;
+}
+
+.spinner {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 2px solid #ecf0f1;
+    width: 14px;
+    height: 14px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Add animations for completed tasks */
+@keyframes completeTask {
+    0% { background-color: #34495e; }
+    50% { background-color: #27ae60; }
+    100% { background-color: #34495e; }
+}
+
+li.completed {
+    animation: completeTask 2s linear;
+}
+
+/* Add styles for countdown timer */
+.timer {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* Add styles for task details page */
+.container p {
+    margin-bottom: 10px;
+    color: #ecf0f1;
+}
+
+.container a {
+    display: block;
+    color: #ffffff;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.container a:hover {
+    color: #1abc9c;
+}
+
+
+/* Add styles for popup notification */
+.popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+/* Add styles for countdown timer */
+.timer {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* Add styles for task details page */
+.container p {
+    margin-bottom: 10px;
+    color: #ecf0f1;
+}
+
+.container a {
+    display: block;
+    color: #ffffff;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.container a:hover {
+    color: #1abc9c;
+}
+
+/* Styles for the new admin features */
+.container a.admin-link {
+    display: block;
+    margin-top: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.container a.admin-link:hover {
+    color: #1abc9c;
 }

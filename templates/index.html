@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>ToDo List</h1>
-        <form action="/add_task" method="POST">
+        <form id="taskForm" action="/add_task" method="POST">
             <input type="text" name="task" placeholder="Task" required>
             <input type="datetime-local" name="due_date" required>
             <select name="category" required>
@@ -19,8 +19,6 @@
                 <option value="School">School</option>
                 <option value="Payment">Payment</option>
                 <option value="Shopping">Shopping</option>
-
-                <!-- Add more categories as needed -->
             </select>
             <button type="submit">Add Task</button>
         </form>
@@ -34,11 +32,17 @@
             </li>
             {% endfor %}
         </ul>
+        {% if user_id == 'admin' %}
+        <div class="admin-options">
+            <a href="/registered_users" class="btn">View Registered Users</a>
+            <a href="/view_other_users" class="btn">View Other Users' Tasks</a>
+        </div>
+        {% endif %}
         <form action="/delete_completed_tasks" method="POST">
             <button type="submit" id="deleteBtn" class="delete-button">Delete Completed Tasks</button>
         </form>
         <a href="/logout">Logout</a>
     </div>
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin ToDo List</h1>
+        <div class="add-task-form">
+            <h2>Add New Task</h2>
+            <form id="taskForm" action="/add_task" method="POST">
+                <input type="text" name="task" placeholder="Task" required>
+                <input type="datetime-local" name="due_date" required>
+                <select name="category" required>
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="College">College</option>
+                    <option value="School">School</option>
+                    <option value="Payment">Payment</option>
+                    <option value="Shopping">Shopping</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+        <div class="admin-options">
+            <!-- Button to view registered users -->
+            <a href="/registered_users" class="btn">View Registered Users</a>
+            <!-- Button to view other users' tasks -->
+        </div>
+        <ul class="task-list">
+            {% for task in tasks %}
+            <li class="task-item {% if task[5] == 1 %}completed{% endif %}">
+                <div class="task-info">
+                    <span class="task-name">{{ task[2] }}</span>
+                    <span class="task-due">Due: {{ task[3] }}</span>
+                    <span class="task-category">Category: {{ task[4] }}</span>
+                    <span class="task-username">Assigned to: {{ task[6] }}</span>
+                </div>
+                <a href="/complete_task/{{ task[0] }}" class="complete-btn">Complete</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="/delete_completed_tasks" method="POST">
+            <button type="submit" class="delete-btn">Delete Completed Tasks</button>
+        </form>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registered Users</h1>
+        <ul class="user-list">
+            {% for user in users %}
+            <li class="user-item">{{ user[1] }} (Password: {{ user[2] }})</li>
+            {% endfor %}
+        </ul>
+        <a href="/admin_todo" class="/admin_todo">Back to Admin ToDo List</a>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
